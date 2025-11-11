@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Example</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ 
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-black text-white px-6 py-3 flex justify-between items-center">
+    <div class="flex justify-between items-center gap-8 ">
+      <!-- Logo -->
+      <div class="text-2xl font-bold text-blue-500">Logo</div>
+
+      <!-- Menu -->
+      <ul class="flex space-x-6 ">
+
+        <!-- dropdown: note top-full (no mt gap) and left-0 -->
+        <li class="relative group">
+          <button class="px-3 py-2 hover:text-blue-400">Image Tools ▾</button>
+
+          <!-- top-full ensures the menu sits immediately below the li (no gap) -->
+          <ul
+            class="absolute left-0 top-full hidden group-hover:block w-48 bg-gray-900 text-white rounded shadow-lg z-50">
+            <li><a class="block px-4 py-2 hover:bg-gray-700" href="/">Compress Image</a></li>
+           
+            
+          </ul>
+        </li>
+
+        <!-- dropdown: note top-full (no mt gap) and left-0 -->
+        <li class="relative group">
+          <button class="px-3 py-2 hover:text-blue-400">Convert Tools ▾</button>
+
+          <!-- top-full ensures the menu sits immediately below the li (no gap) -->
+          <ul
+            class="absolute left-0 top-full hidden group-hover:block w-48 bg-gray-900 text-white rounded shadow-lg z-50">
+            
+            <li><a class="block px-4 py-2 hover:bg-gray-700" href="/convert">Convert Image</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Buttons -->
+    <div class="space-x-3">
+      <button id="theme-toggle" class="px-3 py-2 rounded bg-gray-700 dark:bg-gray-300 dark:text-black">
+        🌙
+      </button>
+      <a href="/login" class="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600 text-white">Log in</a>
+      <a href="/register" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 text-white">Sign up</a>
+
+    </div>
+  </nav>
+
+</body>
+
+</html>

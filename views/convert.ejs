@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900">
+    <%- include('partials/Navbar') %>
+    <form action="/convert" method="POST" enctype="multipart/form-data">
+
+        <div class="max-w-4xl mx-auto pt-16 pb-24 text-center">
+
+            <h1 class="text-4xl text-extrabold font-bold text-white tracking-tight ">JPEG to PNG Converter</h1>
+            <p class="mt-3 text-white text-lg ">Convert image for <span class="font-sm text-gray-400">eg. jpeg to
+                    png</span> </p>
+
+
+            <div class="flex gap-3 items-center text-xl font-semibold mb-5 text-white mt-5">
+                <span>Convert</span>
+
+                <select id="fromFormat" name="fromFormat" class="bg-[#1c1c1c] px-3 py-2 rounded-md border border-gray-700">
+                    <option>JPEG</option>
+                    <option>PNG</option>
+                    <option>WEBP</option>
+                </select>
+
+                <span>to</span>
+
+                <select id="toFormat" name="toFormat" class="bg-[#1c1c1c] px-3 py-2 rounded-md border border-gray-700">
+                    <option>PNG</option>
+                    <option>JPEG</option>
+                    <option>WEBP</option>
+                </select>
+            </div>
+
+            <div id="dropZone"
+                class="border-2 border-gray-500 w-[90%] max-w-4xl h-80 rounded-lg flex flex-col justify-center items-center cursor-pointer">
+
+                <p id="drop" class="text-gray-400 mb-5">Drop files here to start converting</p>
+
+                <label id="select" class="bg-blue-600 rounded-lg px-8 py-4 font-semibold cursor-pointer">
+                    Select Files
+                    <input type="file" name="image" class="hidden" id="fileInput">
+                </label>
+
+                <div id="previewBox" hidden class="transition-all duration-300 p-2">
+                    <div class="flex items-center justify-center overflow-hidden rounded-lg">
+                        <img id="preview" alt="preview"
+                             class="max-h-64 object-contain rounded-lg" />
+                    </div>
+                </div>
+
+                <button id="convertBtn" hidden type="submit"
+                    class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg">
+                    Convert
+                </button>
+
+            </div>
+
+        </div>
+    </form>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const Select = document.getElementById('select');
+        const previewBox = document.getElementById('previewBox');
+        const drop = document.getElementById('drop');
+        const convertBtn = document.getElementById('convertBtn');
+        const fromFormat = document.getElementById('fromFormat');
+        const toFormat = document.getElementById('toFormat');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+
+            previewBox.removeAttribute('hidden');
+            Select.classList.add('hidden');
+            drop.classList.add('hidden');
+            convertBtn.removeAttribute('hidden');
+
+            preview.src = URL.createObjectURL(file);
+        });
+
+        function updateButton() {
+            convertBtn.innerText = `Convert ${fromFormat.value} to ${toFormat.value}`;
+        }
+        fromFormat.addEventListener('change', updateButton);
+        toFormat.addEventListener('change', updateButton);
+        updateButton();
+    </script>
+
+</body>
+
+</html>
